@@ -5,6 +5,8 @@ A modern and responsive React + Bootstrap 5 frontend for your ToDo app.
 ---
 ## Documentation
 
+- **Live Project**: [https://prioritypoint.netlify.app](https://prioritypoint.netlify.app)
+
 ### **Base URL**
 - Development: `http://localhost:5173`
 - Production: `https://your-backend-domain.com`
