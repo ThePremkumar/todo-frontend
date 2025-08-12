@@ -12,7 +12,7 @@ const AppContent = () => {
   const [showRegister, setShowRegister] = useState(false);
 
   return (
-    <div className="d-flex flex-column min-vh-100 bg-light">
+    <div className="d-flex flex-column min-vh-100">
       <Header />
       <main className="flex-grow-1 container py-5">
         {currentUser ? (

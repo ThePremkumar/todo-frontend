@@ -8,7 +8,7 @@ export const TaskProvider = ({ children }) => {
 
   const fetchTasks = async () => {
     try {
-      const res = await fetch("http://localhost:7001/api/tasks", {
+      const res = await fetch("https://todo-backend-uaj2.onrender.com/api/tasks", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const TaskProvider = ({ children }) => {
 
   const addTask = async (taskData) => {
     try {
-      const res = await fetch("http://localhost:7001/api/tasks", {
+      const res = await fetch("https://todo-backend-uaj2.onrender.com/api/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const TaskProvider = ({ children }) => {
   };
 
   const updateTask = async (id, updatedData) => {
-    const res = await fetch(`http://localhost:7001/api/tasks/${id}`, {
+    const res = await fetch(`https://todo-backend-uaj2.onrender.com/api/tasks/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export const TaskProvider = ({ children }) => {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:7001/api/tasks/${id}`, {
+      const res = await fetch(`https://todo-backend-uaj2.onrender.com/api/tasks/${id}`, {
         method: "DELETE",
         headers: {
           "x-auth-token": localStorage.getItem("token"),

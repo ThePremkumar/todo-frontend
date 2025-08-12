@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setError(null);
     try {
-      const res = await fetch('http://localhost:7001/api/auth/login', {
+      const res = await fetch('https://todo-backend-uaj2.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     setError(null);
     try {
-      const res = await fetch('http://localhost:7001/api/auth/register', {
+      const res = await fetch('https://todo-backend-uaj2.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
