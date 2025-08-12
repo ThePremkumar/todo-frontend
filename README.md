@@ -3,6 +3,11 @@
 A modern and responsive React + Bootstrap 5 frontend for your ToDo app.
 
 ---
+## Documentation
+
+### **Base URL**
+- Development: `http://localhost:5173`
+- Production: `https://your-backend-domain.com`
 
 ## Features
 
