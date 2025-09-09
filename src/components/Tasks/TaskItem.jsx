@@ -13,12 +13,14 @@ export const TaskItem = ({ task, onEdit }) => {
   const { toggleComplete, deleteTask } = useTask();
   const [isToggling, setIsToggling] = useState(false);
 
+  // Bootstrap priority badge styles
   const priorityClasses = {
-    low: 'bg-success bg-opacity-10 text-black fw-bold',
-    medium: 'bg-warning bg-opacity-10 text-black fw-bold',
-    high: 'bg-danger bg-opacity-10 text-black fw-bold',
+    low: 'bg-success bg-opacity-10 text-success fw-bold',
+    medium: 'bg-warning bg-opacity-10 text-warning fw-bold',
+    high: 'bg-danger bg-opacity-10 text-danger fw-bold',
   };
 
+  // Format date (e.g. Sep 9, 2025)
   const formatDate = (dateString) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -29,20 +31,22 @@ export const TaskItem = ({ task, onEdit }) => {
     }).format(date);
   };
 
+  // Overdue check
   const overdue = useMemo(() => {
-    if (!task.dueDate || task.completed) return false;
+    if (!task.dueDate || task.status === "completed") return false;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return new Date(task.dueDate) < today;
-  }, [task.dueDate, task.completed]);
+  }, [task.dueDate, task.status]);
 
+  // Border color by status
   let borderColor = 'border-start border-4 border-primary';
-  if (task.completed) borderColor = 'border-start border-4 border-success';
+  if (task.status === "completed") borderColor = 'border-start border-4 border-success';
   else if (overdue) borderColor = 'border-start border-4 border-danger';
 
+  // Toggle completion with loading lock
   const handleToggleComplete = async () => {
     if (isToggling) return;
-
     setIsToggling(true);
     try {
       await toggleComplete(task._id);
@@ -56,11 +60,14 @@ export const TaskItem = ({ task, onEdit }) => {
   return (
     <div className={`bg-white rounded-3 shadow-sm p-3 mb-3 ${borderColor}`}>
       <div className="d-flex align-items-start">
+        
+        {/* Toggle completion button */}
         <button
-          onClick={() => toggleComplete(task._id)}
+          onClick={handleToggleComplete}
           className="btn btn-link btn-sm px-1 me-3"
           title={task.status === "completed" ? 'Mark as Pending' : 'Mark as Completed'}
           style={{ color: task.status === "completed" ? '#198754' : '#adb5bd' }}
+          disabled={isToggling}
         >
           {task.status === "completed"
             ? <CheckCircleIcon size={20} color="#198754" />
@@ -68,28 +75,35 @@ export const TaskItem = ({ task, onEdit }) => {
           }
         </button>
 
+        {/* Task details */}
         <div className="flex-grow-1">
-          <h3 className={`h6 fw-medium mb-1 ${task.completed ? 'text-decoration-line-through text-secondary' : 'text-dark'}`}>
+          <h3 className={`h6 fw-medium mb-1 ${task.status === "completed" ? 'text-decoration-line-through text-secondary' : 'text-dark'}`}>
             {task.title}
           </h3>
           {task.description && (
             <p className="text-muted mb-1 small">{task.description}</p>
           )}
+
           <div className="mt-2 d-flex flex-wrap align-items-center gap-2">
-            <span className={`badge rounded-pill ${priorityClasses[task.priority]}`}>
+            {/* Priority Badge */}
+            <span className={`badge rounded-pill text-white ${priorityClasses[task.priority]}`}>
               {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
             </span>
+
+            {/* Due Date */}
             {task.dueDate && (
               <span className={`small d-inline-flex align-items-center ms-2 ${overdue ? 'text-danger' : 'text-muted'}`}>
                 <ClockIcon size={14} className="me-1" />
                 {formatDate(task.dueDate)}
-                {overdue && !task.completed && (
+                {overdue && task.status !== "completed" && (
                   <AlertCircleIcon size={14} className="ms-1" color="#dc3545" />
                 )}
               </span>
             )}
           </div>
         </div>
+
+        {/* Action buttons (edit/delete) */}
         <div className="ms-2 d-flex flex-column gap-1">
           <button
             onClick={onEdit}

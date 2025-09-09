@@ -77,7 +77,7 @@ export const TaskForm = ({ task, onClose }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="dueDate" className="form-label fw-bold">
+          <label htmlFor="dueDate" className="form-label fw-bold text-black">
             Due Date
           </label>
           <input
@@ -88,6 +88,7 @@ export const TaskForm = ({ task, onClose }) => {
             onChange={e => setDueDate(e.target.value)}
           />
         </div>
+
         <div className="mb-4">
           <label htmlFor="priority" className="form-label fw-bold">
             Priority

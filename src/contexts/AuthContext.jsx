@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
-    token,       // ✅ make token available here
+    token,       
     login,
     register,
     logout,
