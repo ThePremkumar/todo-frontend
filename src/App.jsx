@@ -14,15 +14,15 @@ const AppContent = () => {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Header />
-      <main className="flex-grow-1 container py-5">
+      <main className="flex-grow-1 container py-5 d-flex justify-content-center align-items-start">
         {currentUser ? (
           <TaskProvider>
             <TaskDashboard />
           </TaskProvider>
         ) : (
           <div className="row justify-content-center">
-            <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-              <div className="bg-white p-4 p-md-5 rounded-3 shadow">
+            <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 w-100">
+              <div className="bg-white p-4 p-md-5 rounded-3 shadow ">
                 {showRegister ? (
                   <>
                     <RegisterForm />
